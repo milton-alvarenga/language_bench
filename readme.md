@@ -22,13 +22,13 @@
 ./check_cpu_ram.sh bulk_insert_5000_per_second
 
 # For Go program
-./check_cpu_ram.sh bulk_insert_5000_per_second.go
+./check_cpu_ram.sh go run bulk_insert_5000_per_second.go
 
 # For Python program
-./check_cpu_ram.sh bulk_insert_5000_per_second.py
+./check_cpu_ram.sh python bulk_insert_5000_per_second.py
 
 # For PHP program
-./check_cpu_ram.sh bulk_insert_5000_per_second.php
+./check_cpu_ram.sh php bulk_insert_5000_per_second.php
 </pre>
 
 ### How to compile c program (Debian-like instructions)
