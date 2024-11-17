@@ -94,12 +94,12 @@ func bulkInsertStockPrices(db *sql.DB, startID, endID int) error {
 
 func main() {
 
-    logfilenm := "bulk_insert_5000_per_second_go.log"
+    logfilepath := "./log/bulk_insert_5000_per_second_go.log"
 
     // Check if the file exists
-    if _, err := os.Stat(logfilenm); os.IsNotExist(err) {
+    if _, err := os.Stat(logfilepath); os.IsNotExist(err) {
         // Create the file if it doesn't exist
-        file, err := os.Create(logfilenm)
+        file, err := os.Create(logfilepath)
         if err != nil {
             fmt.Println("Error creating file:", err)
             return
@@ -127,7 +127,7 @@ func main() {
     batchSize := 5000
 
     // Open the file for appending
-    f, err := os.OpenFile(logfilenm, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+    f, err := os.OpenFile(logfilepath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
         fmt.Println("Error opening file:", err)
         return

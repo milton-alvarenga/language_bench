@@ -7,7 +7,7 @@
 #include <sys/time.h>
 
 #define BATCH_SIZE 5000
-#define LOG_FILE_NAME "bulk_insert_5000_per_second_c.log"
+#define LOG_FILE_PATH "./log/bulk_insert_5000_per_second_c.log"
 
 void write_log(FILE *f_log, const char *agent_id, int total_registers_inserted, double time_spent_to_insert) {
     // Get current timestamp
@@ -54,7 +54,7 @@ int main() {
     const char *DB_PORT = getenv("DB_PORT") ? getenv("DB_PORT") : "5432";
 
     // Open log file
-    FILE *f_log = fopen(LOG_FILE_NAME, "a");
+    FILE *f_log = fopen(LOG_FILE_PATH, "a");
     if (!f_log) {
         perror("Failed to open log file");
         return 1;

@@ -1,14 +1,14 @@
 <?php
 // Log file name
-$logFileName = "bulk_insert_5000_per_second_php.log";
+$logFilePath = "./log/bulk_insert_5000_per_second_php.log";
 
 // Create log file with headers if it doesn't exist
-if (!file_exists($logFileName)) {
-    file_put_contents($logFileName, "current_time|agent_id|language|environment_id|total_registers_inserted|time_spent_to_insert\n");
+if (!file_exists($logFilePath)) {
+    file_put_contents($logFilePath, "current_time|agent_id|language|environment_id|total_registers_inserted|time_spent_to_insert\n");
 }
 
 // Open the log file for appending
-$f_log = fopen($logFileName, "a");
+$f_log = fopen($logFilePath, "a");
 
 // Database credentials from environment variables
 $DB_HOST = getenv("DB_HOST");

@@ -6,13 +6,13 @@ from psycopg2.extras import execute_values
 from datetime import datetime
 import socket
 
-logfilenm = "bulk_insert_5000_per_second_py.log"
+logfilepath = "./log/bulk_insert_5000_per_second_py.log"
 
-if not os.path.isfile(logfilenm):
-    with open(logfilenm,'w') as f:
+if not os.path.isfile(logfilepath):
+    with open(logfilepath,'w') as f:
         f.write("current_time|agent_id|language|environment_id|total_registers_inserted|time_spent_to_insert\n")
 
-f_log = open(logfilenm,"a")
+f_log = open(logfilepath,"a")
 
 
 

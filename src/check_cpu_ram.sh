@@ -32,11 +32,11 @@ esac
 PID=$!
 
 # Log file location
-LOG_FILE="process_monitor_${new_program}.log"
+LOG_FILE_PATH="./log/process_monitor_${new_program}.log"
 
 # Check if the log file exists, if not, create it and add a header
-if [ ! -f "$LOG_FILE" ]; then
-    echo "current_time|program|cmd|cpu|mem" > "$LOG_FILE"
+if [ ! -f "$LOG_FILE_PATH" ]; then
+    echo "current_time|program|cmd|cpu|mem" > "$LOG_FILE_PATH"
 fi
 
 # Monitor CPU and RAM usage
@@ -53,7 +53,7 @@ while ps -p $PID > /dev/null; do
     cmd=$(echo $stats | awk '{for (i=3; i<=NF; i++) printf $i " "; print ""}')
 
     # Write to log in the desired format
-    echo "$current_time|$new_program|$cmd|$cpu|$mem" >> $LOG_FILE
+    echo "$current_time|$new_program|$cmd|$cpu|$mem" >> $LOG_FILE_PATH
 
     # Sleep for 1 second
     sleep 1
