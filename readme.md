@@ -3,7 +3,7 @@
 1. Go to environment directory. Actually just amb1 is active.
 1. docker compose build
 1. docker compose up
-1. Copy initial sql to postgresql docker `docker cp docker/amb1/0.sql <container_id>:/tmp
+1. Copy initial sql to postgresql docker `docker cp docker/amb1/0.sql <container_id>:/tmp`
 1. Access postgresql docker container
 1. psql -U languagebench
 1. \i /tmp/0.sql
