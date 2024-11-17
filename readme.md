@@ -42,4 +42,4 @@
 ### How to compile c program (Debian-like instructions)
 1. Access C language docker or use your machine if it has GCC
 1. It is required to have `apt-get install libpq-dev` installed
-1. gcc bulk_insert_5000_per_second.c -o bulk_insert_5000_per_second -I/usr/include/postgresql -lpq
+1. `gcc bulk_insert_5000_per_second.c -o bulk_insert_5000_per_second -I/usr/include/postgresql -lpq`
