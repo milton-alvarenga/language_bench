@@ -1,0 +1,83 @@
+services:
+  languagebench-goapp:
+    image: golang:1.23
+    #container_name: golang-container
+    volumes:
+      - ../../src:/app
+    working_dir: /app
+    stdin_open: true                    # Keep STDIN open to interact with the container
+    tty: true                           # Allocate a TTY for the container
+    #command: CompileDaemon -command="./main"  # Run CompileDaemon for live reload
+    depends_on:
+      - languagebench-db                  # Ensure Golang app waits for the database to start
+    environment:
+      - DB_HOST=languagebench-db          # Hostname of the PostgreSQL container
+      - DB_USER=languagebench             # PostgreSQL user
+      - DB_PASSWORD=test1234            # PostgreSQL password
+      - DB_NAME=languagebench             # PostgreSQL database name
+      - DB_PORT=5432                    # PostgreSQL port
+
+  languagebench-pythonapp:
+    image: python:3.12
+    working_dir: /app
+    volumes:
+      - ../../src:/app
+    stdin_open: true                    # Keep STDIN open to interact with the container
+    tty: true                           # Allocate a TTY for the container
+    #command: ["tail", "-f", "/dev/null"]
+    depends_on:
+      - languagebench-db                  # Ensure Python app waits for the database to start
+    environment:
+      - DB_HOST=languagebench-db          # Hostname of the PostgreSQL container
+      - DB_USER=languagebench             # PostgreSQL user
+      - DB_PASSWORD=test1234            # PostgreSQL password
+      - DB_NAME=languagebench             # PostgreSQL database name
+      - DB_PORT=5432                    # PostgreSQL port
+
+  languagebench-phpapp:
+    build:
+      context: ./php/
+      dockerfile: Dockerfile
+    working_dir: /app
+    volumes:
+      - ../../src:/app
+    stdin_open: true                    # Keep STDIN open to interact with the container
+    tty: true                           # Allocate a TTY for the container
+    #command: ["tail", "-f", "/dev/null"]
+    depends_on:
+      - languagebench-db                  # Ensure Python app waits for the database to start
+    environment:
+      - DB_HOST=languagebench-db          # Hostname of the PostgreSQL container
+      - DB_USER=languagebench             # PostgreSQL user
+      - DB_PASSWORD=test1234            # PostgreSQL password
+      - DB_NAME=languagebench             # PostgreSQL database name
+      - DB_PORT=5432                    # PostgreSQL port
+
+  languagebench-capp:
+    build:
+      context: ./c/
+      dockerfile: Dockerfile
+    volumes:
+      - ../../src:/app  # Mount local 'src' directory to '/app' in the container
+    stdin_open: true
+    tty: true
+    depends_on:
+      - languagebench-db                  # Ensure Python app waits for the database to start
+    environment:
+      - DB_HOST=languagebench-db          # Hostname of the PostgreSQL container
+      - DB_USER=languagebench             # PostgreSQL user
+      - DB_PASSWORD=test1234            # PostgreSQL password
+      - DB_NAME=languagebench             # PostgreSQL database name
+      - DB_PORT=5432                    # PostgreSQL port
+
+
+  languagebench-db:
+    image: postgres:17
+    environment:
+      - POSTGRES_DB=languagebench         # Define the database name
+      - POSTGRES_USER=languagebench       # Define the PostgreSQL user
+      - POSTGRES_PASSWORD=test1234      # Define the PostgreSQL password
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/postgresql/languagebench:/var/lib/postgresql/data # Persist PostgreSQL data
