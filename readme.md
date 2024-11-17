@@ -2,6 +2,10 @@
 1. Go to docker directory
 2. Go to environment directory. Actually just amb1 is active.
 3. docker compose build
+4. docker compose up
+5. Access python container
+6. Go to data directory `cd data`
+6. Execute `python import_ticker.py`
 
 # How to execute the docker environment
 1. Go to docker directory
