@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     make \
     libpq5 \
     libpq-dev \
+    procps \
     && apt-get clean
 
 # Set the working directory
